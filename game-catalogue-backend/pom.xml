@@ -107,7 +107,7 @@
   </dependencies>
 
 
-  <description>Demo project for Spring Boot</description>
+  <description>Game catalogue</description>
   <artifactId>platform</artifactId>
   <groupId>com.game.store</groupId>
   <modelVersion>4.0.0</modelVersion>
