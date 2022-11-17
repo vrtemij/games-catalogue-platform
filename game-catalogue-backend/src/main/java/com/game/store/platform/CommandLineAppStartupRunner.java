@@ -1,5 +1,6 @@
-package com.game.store.platform.modules.user.service;
+package com.game.store.platform;
 
+import com.game.store.platform.modules.cart.repository.CartRepository;
 import com.game.store.platform.modules.game.model.GameCategory;
 import com.game.store.platform.modules.game.model.entity.GameEntity;
 import com.game.store.platform.modules.game.repository.GameRepository;
@@ -20,11 +21,14 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
   private final GameRepository gameRepository;
 
+  private final CartRepository cartRepository;
+
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
   public void run(String...args) throws Exception {
     userRepository.deleteAll();
+    cartRepository.deleteAll();
     gameRepository.deleteAll();
 
     userRepository.save(createAdminUser());
