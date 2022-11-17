@@ -1,0 +1,5 @@
+com/game/store/platform/modules/utils/TestUtil.class
+com/game/store/platform/modules/order/service/OrderProcessingServiceImplTest.class
+com/game/store/platform/modules/cart/service/CartServiceImplTest.class
+com/game/store/platform/modules/game/service/GameServiceImplTest.class
+com/game/store/platform/modules/user/service/UserServiceImplTest.class
