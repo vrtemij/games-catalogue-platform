@@ -10,21 +10,16 @@ In this <b>Application</b> user can:
 - Registered user can check out and games will be added to the library (backend only)
 
 ## Technologies used
+
 ###Backend
 ```
 Java 11, Spring Boot 2.7.5, MySQL
 ```
+
 ###Frontend
 ```
 TypeScript, React.js, ChakraUI
 ```
-For user auth I implemented jwt-token based authentication, HttpSession id is used for storing cart.
-
-You can find postman.json file to check endpoints or start an application and go to ${server:port}/swagger-iu/ page 
-
-On the start of the application user with role admin is created. Use username:admin password:admin for login
-
-Frontend made with React.js and ChakraUi.
 ## Installation
 ###Backend
 Create schema for application from file `table-create.sql`.
@@ -41,5 +36,12 @@ To start frontend run:
 yarn install
 yarn start
 ```
-[http://localhost:3000](http://localhost:3000) to view application in the browser.
+Visit [http://localhost:3000](http://localhost:3000) to view application in the browser.
+
+###Notes
+
+For user auth I implemented jwt-token based authentication, HttpSession id is used for storing user cart.
+On the start of the application admin user is created, use `{"username": "admin", "password": "admin"}` to login.
+
+Visit [swagger-ui](http://localhost:8080/swagger-iu/) to view application api or export `platform.postman_collection.json` to postman.
 
