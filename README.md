@@ -12,30 +12,40 @@ In this <b>Application</b> user can:
 ## Technologies used
 
 ###Backend
+
 ```
 Java 11, Spring Boot 2.7.5, MySQL
 ```
 
 ###Frontend
+
 ```
 TypeScript, React.js, ChakraUI
 ```
+
 ## Installation
+
 ###Backend
+
 Create schema for application from file `table-create.sql`.
 
 Specify variables for `application.properties`.
 
 To start backend run:
+
 ```
 mvn spring-boot:run
 ```
+
 ###Frontend
+
 To start frontend run:
+
 ```
 yarn install
 yarn start
 ```
+
 Visit [http://localhost:3000](http://localhost:3000) to view application in the browser.
 
 ###Notes
