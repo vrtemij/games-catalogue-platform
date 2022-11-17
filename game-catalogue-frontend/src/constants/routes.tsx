@@ -1,5 +1,5 @@
 import { App } from "../App";
-import { Cart, Home, Signup } from "../pages";
+import { Cart, Home, UserAuth } from "../pages";
 
 export const ROUTES = [
   {
@@ -12,7 +12,11 @@ export const ROUTES = [
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: <UserAuth signupForm />,
+      },
+      {
+        path: "/login",
+        element: <UserAuth />,
       },
       {
         path: "/checkout",

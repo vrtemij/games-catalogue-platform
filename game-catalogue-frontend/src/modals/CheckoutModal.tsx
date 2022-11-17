@@ -30,39 +30,29 @@ export const CheckoutModal: FC<Props> = ({
         <ModalHeader>Checkout</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          <Text fontSize="md" fontWeight="semibold" align="center">
-            Looks like you don't have an account!
+          <Text align="center">
+            You can continue checkout with your account
           </Text>
-          <Text fontSize="md" fontWeight="semibold" align="center" mb={4}>
-            Would you like to create a new one?
-          </Text>
-          <FormControl>
-            <FormLabel>Username</FormLabel>
-            <Input autoComplete="username" placeholder="John Doe" />
-          </FormControl>
-          <FormControl mt={4}>
-            <FormLabel>Password</FormLabel>
-            <Input
-              autoComplete="new-password"
-              type="password"
-              placeholder="Secret"
-            />
-          </FormControl>
-          <Flex justify="center" align="center" mt={4}>
-            ...or
-            <Link to="checkout" onClick={onClose}>
+          <Flex justify="center" align="center" mt={2}>
+            <Link to="signup" onClick={onClose}>
+              <Button colorScheme="teal" mr={1}>
+                Sing up
+              </Button>
+            </Link>
+            /
+            <Link to="login" onClick={onClose}>
               <Button colorScheme="teal" ml={1}>
-                Continue without registration
+                Sign in
               </Button>
             </Link>
           </Flex>
+          <Text align="center">Or</Text>
+          <Flex justify="center" align="center">
+            <Link to="checkout" onClick={onClose}>
+              <Button colorScheme="teal">Continue without registration</Button>
+            </Link>
+          </Flex>
         </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="teal" mr={3}>
-            Create
-          </Button>
-          <Button onClick={onClose}>Cancel</Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );

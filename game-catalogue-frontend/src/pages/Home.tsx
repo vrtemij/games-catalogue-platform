@@ -1,100 +1,77 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
 
-import { Game, GameCategory, GameProduct } from "../interfaces";
+import { Game, GameProduct } from "../interfaces";
+import { GameCard, GamesListLoader } from "../components";
+import { getGamesList, removeFromCart, updateCart } from "../services";
+import { HTTP_STATUSES } from "../constants";
 
-import { GameCard } from "../components";
+export const Home: FC = () => {
+  const [isLoading, setLoading] = useState(false);
+  const [gamesList, setGamesList] = useState<GameProduct[]>([]);
 
-interface Props {}
-
-export const Home: FC<Props> = () => {
-  const [gamesList, setGamesList] = useState<GameProduct[]>([
-    {
-      id: 1,
-      name: "Grand Theft Auto",
-      description: ` Grand Theft Auto is a series of action-adventure games created by
-          David Jones and Mike Dailly. Later titles were developed under the
-          oversight of brothers Dan and Sam Houser, Leslie Benzies and Aaron
-          Garbut.`,
-      category: GameCategory.Adventure,
-      price: "$119",
-      inCart: false,
-    },
-    {
-      id: 2,
-      name: "Grand Theft Auto",
-      description: ` Grand Theft Auto is a series of action-adventure games created by
-          David Jones and Mike Dailly. Later titles were developed under the
-          oversight of brothers Dan and Sam Houser, Leslie Benzies and Aaron
-          Garbut.`,
-      category: GameCategory.Action,
-      price: "$119",
-      inCart: false,
-    },
-    {
-      id: 3,
-      name: "Grand Theft Auto",
-      description: ` Grand Theft Auto is a series of action-adventure games created by
-          David Jones and Mike Dailly. Later titles were developed under the
-          oversight of brothers Dan and Sam Houser, Leslie Benzies and Aaron
-          Garbut.`,
-      category: GameCategory.Racing,
-      price: "$119",
-      inCart: false,
-    },
-    {
-      id: 4,
-      name: "Grand Theft Auto",
-      description: ` Grand Theft Auto is a series of action-adventure games created by
-          David Jones and Mike Dailly. Later titles were developed under the
-          oversight of brothers Dan and Sam Houser, Leslie Benzies and Aaron
-          Garbut.`,
-      category: GameCategory.Sport,
-      price: "$119",
-      inCart: false,
-    },
-    {
-      id: 5,
-      name: "Grand Theft Auto",
-      description: ` Grand Theft Auto is a series of action-adventure games created by
-          David Jones and Mike Dailly. Later titles were developed under the
-          oversight of brothers Dan and Sam Houser, Leslie Benzies and Aaron
-          Garbut.`,
-      category: GameCategory.Strategy,
-      price: "$119",
-      inCart: false,
-    },
-  ]);
-
-  const handleAddToCart = (id: Game["id"]) => {
-    setGamesList(
-      gamesList.map((game) => {
-        if (id === game.id) {
-          return {
-            ...game,
-            inCart: true,
-          };
+  useEffect(() => {
+    setLoading(true);
+    getGamesList()
+      .then(({ data }) => {
+        if (data?.items) {
+          setGamesList(data.items);
         }
-
-        return game;
       })
-    );
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  const handleAddToCart = async (id: Game["id"]) => {
+    updateCart({ id }).then(({ status }) => {
+      if (status === HTTP_STATUSES.OK) {
+        setGamesList(
+          gamesList.map((game) => {
+            if (id === game.id) {
+              return {
+                ...game,
+                inCart: true,
+              };
+            }
+
+            return game;
+          })
+        );
+      }
+    });
   };
 
   const handleRemoveFromCart = (id: Game["id"]) => {
-    setGamesList(
-      gamesList.map((game) => {
-        if (id === game.id) {
-          return {
-            ...game,
-            inCart: false,
-          };
-        }
+    removeFromCart({ id }).then(({ status }) => {
+      if (status === HTTP_STATUSES.OK) {
+        setGamesList(
+          gamesList.map((game) => {
+            if (id === game.id) {
+              return {
+                ...game,
+                inCart: false,
+              };
+            }
 
-        return game;
-      })
-    );
+            return game;
+          })
+        );
+      }
+    });
   };
+
+  if (isLoading) {
+    return <GamesListLoader />;
+  }
+
+  if (!isLoading && !gamesList?.length) {
+    return (
+      <Flex h="100%" w="100%" justify="center" align="center">
+        We are sorry, but all games are sold out :(
+      </Flex>
+    );
+  }
 
   return (
     <Flex p={3} gap={3} flexWrap="wrap" alignContent="baseline">

@@ -13,11 +13,7 @@ const root = ReactDOM.createRoot(container);
 
 const router = createBrowserRouter(ROUTES);
 
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+root.render(<RouterProvider router={router} />);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

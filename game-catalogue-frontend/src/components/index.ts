@@ -3,3 +3,4 @@ export { ColorModeSwitcher } from "./Buttons/ColorModeSwitcher";
 export { CheckoutButton } from "./Buttons/CheckoutButton";
 export { AccountButton } from "./Buttons/AccountButton";
 export { HomeButton } from "./Buttons/HomeButton";
+export { GamesListLoader } from "./Loaders/GamesListLoader";

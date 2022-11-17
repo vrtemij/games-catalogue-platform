@@ -15,5 +15,21 @@ export interface Game {
 }
 
 export interface GameProduct extends Game {
-  inCart: boolean;
+  inCart?: boolean;
+}
+
+export interface Cart {
+  total: string;
+  games: Game[];
+}
+
+export interface PagedListResponse<T> {
+  items: T[];
+  totalCount: number;
+}
+
+export interface UserAuthFormData {
+  username: string;
+  password: string;
+  token?: string;
 }

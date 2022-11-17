@@ -10,11 +10,16 @@ import {
 
 import { FaRegUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useToken } from "../../hooks";
 
 type SignupButtonProps = Omit<IconButtonProps, "aria-label">;
 
 export const AccountButton: React.FC<SignupButtonProps> = () => {
-  const isAuthorized = false;
+  const { token, setToken } = useToken();
+  const handleLogoutClick = () => {
+    setToken("");
+  };
+
   return (
     <>
       <Menu>
@@ -31,14 +36,19 @@ export const AccountButton: React.FC<SignupButtonProps> = () => {
               <FaRegUserCircle />
             </MenuButton>
             <MenuList>
-              {isAuthorized ? (
-                <MenuItem fontSize="md" onClick={() => {}}>
+              {!!token ? (
+                <MenuItem fontSize="md" onClick={handleLogoutClick}>
                   Logout
                 </MenuItem>
               ) : (
-                <Link to="signup">
-                  <MenuItem fontSize="md">Log in / Sign up</MenuItem>
-                </Link>
+                <>
+                  <Link to="login">
+                    <MenuItem fontSize="md">Log in</MenuItem>
+                  </Link>
+                  <Link to="signup">
+                    <MenuItem fontSize="md">Sign up</MenuItem>
+                  </Link>
+                </>
               )}
             </MenuList>
           </>
